@@ -13,6 +13,9 @@ describe('filters/string', function () {
       return expect(test('{{ "abc" | append }}', 'abc')).to.be.rejectedWith(/2 arguments/)
     })
     it('should return "abcfalse" for "abc", false', () => test('{{ "abc" | append: false }}', 'abcfalse'))
+    it('should support appending a pipe as a separator', () => {
+      return test('{{ "abc" | append: " | " | append: "123" }}', 'abc | 123')
+    })
   })
   describe('prepend', function () {
     it('should return "-3abc" for -3, "abc"',
